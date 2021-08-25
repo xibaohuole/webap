@@ -1,0 +1,45 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 17:23:59
+ * @LastEditTime: 2021-08-18 09:14:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\18-context-no-props.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app"></div>
+<script src="js/vue.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+      }
+    },
+    template:`
+     <div>
+       <lk-box sex="男" style="background-color: red; width: 100px; height: 100px;"></lk-box>
+     </div>
+    `
+  });
+
+  app.component('lk-box', {
+     setup(props, context){
+       const {attrs, slots, emit} = context;
+       console.log(attrs);
+       console.log(attrs.style)
+     },
+     template: `
+       <div :style="$attrs.style">我是子组件</div>
+     `
+  });
+
+  app.mount('#app');
+</script>
+</body>
+</html>

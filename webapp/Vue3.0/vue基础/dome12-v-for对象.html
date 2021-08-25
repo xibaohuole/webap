@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+<!-- 注意：v-if和v-for一起用是有优先级的
+2.x中 v-for会优先
+3.x中 v-if会优先
+解决：最好不要一起使用
+-->
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in persons">{{item}}</li>
+        </ul>
+        <p>-----------------------------------------</p>
+        <ul>
+            <li v-for="(item,key,index) in persons">"{{index}} + vuele:"{{item}}"的key是"{{key}}</li>
+        </ul>
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                 persons:{
+                     name:"123",
+                     age:12,
+                     interests:['唱歌','跳舞','玩游戏']
+                 }
+             }
+            },methods:{
+                
+            }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

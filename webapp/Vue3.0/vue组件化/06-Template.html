@@ -1,0 +1,91 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-13 09:35:30
+ * @LastEditTime: 2021-08-13 13:50:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\05-局部组件.html
+-->
+<!-- 重点注意 组件命名规范  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <Lt></Lt>
+       <ltdiv></ltdiv>
+       <ltdiv></ltdiv>
+    </div>
+    <template type="text/template" id="lt">
+        <button style="width: 200px; height: 200px; background-color: red;">盒子组件<cc_Lt></cc_Lt></button>
+    </template>
+    <template type="text/template" id="counter">
+        <button @click="count++">点击{{count}}</button>
+    </template>
+    <script>
+        //创建一个局部组件
+        const Counter ={
+            data(){
+                return{
+                    count:0
+                }
+            },
+            template:'#counter'
+        }
+
+        //创建一个局部组件(错误写法)
+        // const ReadSpan ={
+        //         data(){
+        //             return{
+        //                 text:'你好'
+        //             }
+        //         },
+        //         template:`
+        //             <span>显示{{text}}
+        //                 <Counter></Counter>
+        //             </span>`
+        //     }
+
+
+        //创建一个局部组件 并且使用另一个局部组件
+        const ComDiv ={
+                data(){
+                    return{
+                        str:'你好'
+                    }
+                },
+                components:{
+                    'cc_Lt' : '#counter'
+                },
+                template:'#lt'
+                // template:`<button style="width: 200px; height: 200px; background-color: red;">盒子组件</button>`
+            }
+
+
+        //创建vue实例
+        const app = Vue.createApp({
+           data() {
+             return {
+                 
+             }
+          },
+           methods:{
+
+          },
+          components:{
+              'lt' : Counter,
+              'ltdiv':ComDiv
+          }
+         }).mount('#app'); 
+        
+    </script>
+</body>
+</html>

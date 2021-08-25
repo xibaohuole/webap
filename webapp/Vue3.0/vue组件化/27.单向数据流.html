@@ -1,0 +1,55 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 16:40:23
+ * @LastEditTime: 2021-08-16 16:53:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\27.单向数据流.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const mybox = {
+            props: {
+                total: Number
+            },
+            data(){
+                return {
+                    mytotal:this.total
+
+                }
+            },
+            template: `
+            <div>传递的数据: {{total}}</div>
+            <button @click="total++">修改</button>
+            <p>--------------------------------------------</p>
+            <div>传递的数据: {{mytotal}}</div>
+            <button @click="mytotal++">修改</button>
+        `
+        }
+        const app = Vue.createApp({
+            data() {
+                return {
+                    count: 100
+                }
+            },
+            components: {
+                'lee-box': mybox
+            },
+            template:`<lee-box :total="count"></lee-box>`
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-13 15:01:55
+ * @LastEditTime: 2021-08-13 15:59:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\11-父子组件通信-父传子.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <checklist :brand="{name:123}" :colleges="['1','2','3']"></checklist>
+    </div>
+    <!-- 创建局部组件 -->
+    <!-- <template id="box">
+        
+    </template> -->
+    <script>
+        const Box = {
+            props:{
+                brand:String,
+                colleges:Array
+            },
+            template : `
+                <div>
+                    <h1>{{brand}}</h1>
+                    <ul>
+                        <li v-for="p in colleges">{{p}}</li>
+                    </ul>
+                </div>
+            `
+        }
+
+        const app = Vue.createApp({
+           data() {
+             return {
+                //  msg1:'lllllll',
+                //  msg2:['log1','log2','log3']
+             }
+          },
+           methods:{
+
+          },
+          components:{
+              'checklist':Box
+          }
+          
+         }).mount('#app') 
+    </script>
+</body>
+</html>

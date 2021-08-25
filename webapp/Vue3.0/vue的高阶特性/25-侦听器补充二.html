@@ -1,0 +1,82 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-18 09:59:16
+ * @LastEditTime: 2021-08-18 11:19:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\24-侦听器补充.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            setup(props, context) {
+                const { ref, reactive, watch, toRefs } = Vue;
+
+                let person_1 = reactive({ name: 'lee', age: 123 })
+                let person_2 = reactive({ name: 'liu', age: 345 })
+
+                //一 参数监视目标
+                //二 回调 (新参数 旧参数)
+                //三 配置
+                // watch(person_1, (currentValue, preValue) => {
+                //     // 相应业务
+                //     console.log('现在的:', currentValue);
+                //     console.log('之前的:', preValue);
+                // })
+
+                // 假设我要监听对象里的属性
+                 // watch(person_1.name, (currentValue, preValue) => {
+                //     // 相应业务
+                //     console.log('现在的:', currentValue);
+                //     console.log('之前的:', preValue);
+                // })
+                // 报错：
+                // [Vue warn]: Invalid watch source:  lee A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types. 
+                // at <App>
+            
+                
+                   watch(()=>person_1.name, (currentValue, preValue) => {
+                    // 相应业务
+                    console.log('现在的:', currentValue);
+                    console.log('之前的:', preValue);
+                })
+
+                const { name, age } = toRefs(person_1);
+                return {
+                    name,
+                    age
+                }
+
+                //    watch([person_1,person_2],([currentBarnd,currentMail],[oldBarnd,oldMail])=>{
+                //         console.log(currentBarnd,oldBarnd);
+                //         console.log(currentMail,oldMail);
+                //    },{})
+                //    return{
+                //        barnd,
+                //        mail
+                //    }
+            },
+            template: `
+            <input v-model="age">
+           <p>{{age}}</p>
+           <p>----------------------------</p>
+            <input v-model="name">
+           <p>{{name}}</p>
+           `
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

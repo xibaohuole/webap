@@ -1,0 +1,56 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 13:53:27
+ * @LastEditTime: 2021-08-17 14:04:20
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\04-自定义指令.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //局部指令 需要在实例内部的Dirctives中引用
+        const myDirctive = {
+            focus:{
+                mounted(el) {
+                    el.focus();
+                },
+            }
+        }
+        const app = Vue.createApp({
+           data() {
+             return {
+                 
+             }
+          },
+          directives:myDirctive,
+           methods:{
+
+          },template:`
+            <div>
+                <input placeholder="请输入姓名" v-focus/>
+            </div>
+          `
+         })
+
+         //全局指令 挂载在app实例的directive
+        //  app.directive('focus',{
+        //      mounted(el) {
+        //          el.focus();
+        //      },
+        //  });
+         app.mount('#app') 
+    </script>
+</body>
+</html>

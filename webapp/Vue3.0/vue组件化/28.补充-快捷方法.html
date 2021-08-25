@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 16:40:23
+ * @LastEditTime: 2021-08-16 17:02:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\27.单向数据流.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const mybox = {
+            props:['num1','num2','num3','num4'] ,
+            data(){
+                return {
+                    mytotal:this.total
+
+                }
+            },
+            template: `
+            <div>数据:{{num1}}</div>
+            <div>数据:{{num2}}</div>
+            <div>数据:{{num3}}</div>
+            <div>数据:{{num4}}</div>
+        `
+        }
+        const app = Vue.createApp({
+            data() {
+                return {
+                    a:"10",
+                    b:"20",
+                    c:"30",
+                    d:"40",
+                    numobj:{
+                        num1:100,
+                        num2:200,
+                        num3:300,
+                        num4:400
+                    }
+                }
+            },
+            components: {
+                'lee-box': mybox
+            },
+            template:`
+            <lee-box :num1="1" :num2="b" :num3="c" :num4="d"></lee-box>
+            <p>-------------------------------------------------------</p>
+            <lee-box v-bind="numobj"></lee-box>
+            `
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

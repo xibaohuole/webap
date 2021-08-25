@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 14:48:52
+ * @LastEditTime: 2021-08-16 15:10:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\23.动态组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                 cItem : "lee-btn"
+             }
+          },
+           methods:{
+            change(){
+                if(this.cItem==='lee-btn'){
+                    this.cItem ='lee-input'
+                }else{
+                    this.cItem ='lee-btn'
+                }
+            }
+          },
+           /*  <lee-btn v-show="cItem === 'lee-btn'"></lee-btn>
+                <lee-input v-show="cItem === 'lee-input'"></lee-input> 
+                component 是动态组件 通过:is 来选择名字匹配的组件 来显示
+                可是我们发现当input切换回来 之前输入的内容已经消失了 因为没有保存内存
+                我们可以通过 keep-alive标签来实现内存的缓存
+                */
+          template:`
+            <div>
+                <keep-alive>
+                    <component :is="cItem"></component>
+                </keep-alive>
+                <button @click="change">点击切换</button>
+            </div>
+          `
+         }) 
+
+         app.component('lee-btn',{
+             template:`<button>lee</button>`
+         });
+         app.component('lee-input',{
+             template:`<input type='text'/>`
+         })
+         app.mount('#app');
+    </script>
+</body>
+</html>

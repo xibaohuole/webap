@@ -1,0 +1,80 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-13 15:01:55
+ * @LastEditTime: 2021-08-17 09:36:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\11-父子组件通信-父传子.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <checklist :lt-brand="你好" :lt-colleges="['1','2','3']" @box-click="boxfunc"></checklist>
+    </div>
+    <!-- 创建局部组件 -->
+    <template id="box">
+        <div>
+            <h1>{{ltBrand}}</h1>
+            <ul>
+                <li v-for="p in ltColleges">{{p}}</li>
+            </ul>
+            <button @click="myClick"></button>
+        </div>
+    </template>
+    <script>
+        const Box = {
+            props:{
+                ltBrand :{
+                    type:String,//能够指定的类型
+                    required:true,//可以使用required选项来声明这个参数是否必须传入。
+                    default:'哈哈哈'//使用default选项来指定当父组件未传入参数时props变量的默认值：
+                },
+                ltColleges:{
+                    type:Array,
+                    required:true,
+                }
+            },
+            methods:{
+                myClick(){
+                    alert('点击了');
+                    const dataObj={
+                        name:'lee',
+                        intro:'like IT'
+                    }
+                    this.$emit('box-click',dataObj)
+                }
+            },
+            template : '#box'
+        }
+
+        const app = Vue.createApp({
+           data() {
+             return {
+                 msg1:'lllllll',
+                 msg2:['log1','log2','log3']
+             }
+          },
+           methods:{
+            boxfunc(inputdata){
+                console.log('父级事件触发');
+                console.log(inputdata);
+            }
+          },
+          components:{
+              'checklist':Box
+          }
+          
+         }).mount('#app') 
+    </script>
+</body>
+</html>

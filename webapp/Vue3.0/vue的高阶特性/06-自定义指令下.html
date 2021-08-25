@@ -1,0 +1,120 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 14:04:48
+ * @LastEditTime: 2021-08-17 14:37:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\05-自定义指令中(生命周期).html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+<body>
+  <div id="app"></div>
+  <script src="js/vue.js"></script>
+  <script>
+    const lkDirective = {
+      focus:{
+        created(){
+          console.log('created()');
+        },
+        beforeMount(){
+          console.log('beforeMount()');
+        },
+        mounted(el) {
+          console.log('mounted()');
+          el.focus();
+        },
+        beforeUpdate(){
+          console.log('beforeUpdate()');
+        },
+        updated(){
+          console.log('updated()');
+        },
+        beforeUnmount(){
+          console.log('beforeUnmount()');
+        },
+        unmounted(){
+          console.log('unmounted()');
+        },
+      }
+    };
+    
+    const myfixed = {
+        fixed:{
+            mounted(el) {
+                el.postion = 'fiexd'
+                el.style.left = lef + 'px';
+                el.style.right = right + 'px';
+            },
+        }
+       
+    }
+    const app = Vue.createApp({
+      data() {
+        return {
+            postionData:{
+                left :300,
+                top:300,
+            },
+          isShow: true
+        }
+      },
+    //   directives: lkDirective,
+      template: `
+        <div class="box" v-fixed="postionData">
+           <input type="text" v-focus>
+        </div>
+      `
+    })
+    app.directive('fixed',{
+        mounted(el,binding) {
+                el.style.position = 'fixed'
+                el.style.left = binding.value.left + 'px';
+                el.style.top = binding.value.top + 'px';
+                console.log(el.position)
+            },
+    })
+
+    app.directive('focus',{
+ 
+        created(){
+          console.log('created()');
+        },
+        beforeMount(){
+          console.log('beforeMount()');
+        },
+        mounted(el) {
+          console.log('mounted()');
+          el.focus();
+        },
+        beforeUpdate(){
+          console.log('beforeUpdate()');
+        },
+        updated(){
+          console.log('updated()');
+        },
+        beforeUnmount(){
+          console.log('beforeUnmount()');
+        },
+        unmounted(){
+          console.log('unmounted()');
+        },
+    })
+    app.mount('#app');
+  </script>
+</body>
+</html>

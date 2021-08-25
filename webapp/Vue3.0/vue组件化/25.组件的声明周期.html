@@ -1,0 +1,98 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 15:21:09
+ * @LastEditTime: 2021-08-16 16:16:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\25.组件的声明周期.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: '123'
+                }
+            },
+
+            //生命周期函数：组件的生命周期范围内 在 某一个节点 会 自动执行 的函数
+            //   1.在实例生成之前会自动执行
+            beforeCreate() {
+                console.log('beforeCreate()')
+            },
+            //   2.在实例生成之后自动执行 组件内部的一些事情 可以在这里做 如网络请求
+            created() {
+                console.log('created()')
+
+            },
+            // 3.在组件内容被渲染到页面 之前 调用
+            beforeMount() {
+                console.log('----------------');
+                console.log(document.getElementById('app').innerHTML);
+                console.log('beforeMount()')
+                console.log('----------------');
+            },
+            // 4.在组件内容被渲染到页面 之后 调用  页面绑定需求可以在这里做
+            //解析模板内容之后
+            mounted() {
+                console.log('----------------');
+                console.log(document.getElementById('app').innerHTML);
+                console.log('mounted()')
+                console.log('----------------');
+            },
+            // 5.数据发生变化时调用 这里好像是渲染的数据发生改变才会运行 如果是非渲染数据 就不会
+            beforeUpdate() {
+                console.log('----------------');
+                console.log(document.getElementById('app').innerHTML);
+                console.log('beforeUpdate()')
+                console.log('数据已经发生改变,但是界面还未刷新')
+            },
+            //6.数据变化发生完毕 界面渲染完毕之后调用
+            updated() {
+                console.log('----------------');
+                console.log(document.getElementById('app').innerHTML);
+                console.log('updated()')
+                console.log('数据改变完成，界面也刷新完毕')
+            },
+            // 7.当vue实例失效时，自动执行函数
+            beforeUnmount() {
+                console.log('beforeUnmount()')
+                
+            },
+            //8.当vue实例失效时，dom完全销毁，自动执行函数
+            unmounted() {
+                console.log('unmounted()')
+                
+            },
+            // 9.全局的错误捕获
+
+            errorCaptured: (err, vm, info) => {
+                console.log(err,vm,info);
+                return false;
+            },
+            template: `<h1>{{msg}}</h1>`,
+            methods: {
+
+            }
+        })
+        app.mount('#app');
+        //3.x版本不提倡自己做生命周期管理 这里只是模拟
+        setTimeout(()=>{
+            app.unmount('#app')
+        },3000)
+    </script>
+</body>
+
+</html>

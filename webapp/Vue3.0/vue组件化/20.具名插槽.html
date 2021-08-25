@@ -1,0 +1,71 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 11:11:22
+ * @LastEditTime: 2021-08-16 11:26:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\20.具名插槽.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <leebox>
+            <template v-slot:header>
+                <button>头部1</button>
+            </template>
+            <template v-slot:main>
+                <button>主要内容1</button>
+            </template>
+            <template v-slot:default>
+                <button>底部内容1</button>
+            </template>
+        </leebox>
+        <p>-----------------------------------------</p>
+        <leebox v-slot:main>呵呵呵这是主要内容</leebox>
+        <p>-----------------------------------------</p>
+        <leebox v-slot:footer>耶耶耶这是底部内容</leebox>
+    </div>
+
+    <template id="box">
+        <div>
+            <header>
+                <slot name="header">这是头部内容</slot>
+            </header>
+            <main>
+                <slot name="main">这是主要内容</slot>
+            </main>
+            <footer>
+                <slot>这是底部内容</slot>
+            </footer>
+        </div>
+    </template>
+    <script>
+        const mybox = {
+            template : "#box"
+        }
+        const app = Vue.createApp({
+           data() {
+             return {
+                 
+             }
+          },
+           methods:{
+
+          },
+          components:{
+              'leebox' : mybox
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

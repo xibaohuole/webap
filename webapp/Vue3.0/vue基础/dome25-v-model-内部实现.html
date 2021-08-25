@@ -1,0 +1,52 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-12 11:28:23
+ * @LastEditTime: 2021-08-12 11:33:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue\dome25-v-model-内部实现.html
+-->
+<!--
+ * @Author: your name
+ * @Date: 2021-08-12 11:04:58
+ * @LastEditTime: 2021-08-12 11:06:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue\dome24-v-model-基础使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model='vtext'>
+        <div>{{vtext}}</div> -->
+
+        <input type="text" @input="valueChange">
+        <div>{{vtext}}</div>
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                vtext:'',
+
+             }
+          },
+           methods:{
+            valueChange(event){
+                this.vtext = event.target.value;
+            }
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

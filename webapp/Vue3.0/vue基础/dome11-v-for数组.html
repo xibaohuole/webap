@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="p in personArr">{{p}}</li>
+        </ul>
+        <ul>
+            <li v-for="(p,index) in personArr">{{ index }} -- {{p}}</li>
+        </ul>
+        <ul>
+            <li v-for="(p,index) in persons">{{ p.name }} -- {{p.age}} -- {{p.address}}</li>
+        </ul>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    personArr: ['vincelee', 20, '蚂蚁课堂'],
+                    persons:[
+                        {name:'lee',age:15,address:'长沙'},
+                        {name:'liu',age:14,address:'北京'},
+                        {name:'xie',age:13,address:'纽约'},
+                        {name:'zhang',age:12,address:'东京'},
+                    ]
+                }
+            }, methods: {
+
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 16:16:51
+ * @LastEditTime: 2021-08-16 16:33:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\26.侦听器.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>普通价格{{price}}</h1>
+        <h2>会员价格{{memberPrice}}</h2>
+        <h2>Vip价格{{vipPrice}}</h2>
+
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                price:5,
+                vipPrice:0
+             }
+          },
+           methods:{
+
+          },computed:{
+            memberPrice(){
+                return this.price * 0.8
+                //计算属性不支持异步 watch中可以 直接变化用计算 间接的用watch
+            }
+          },
+          //侦听器
+          watch:{
+              price(current,prev){
+                  console.log(current,prev);
+                  console.log('价格发生改变！')
+                  setTimeout(()=>{
+                    this.vipPrice = current * 0.5
+                  },2000)
+              }
+          }
+
+         }).mount('#app') 
+    </script>
+</body>
+</html>

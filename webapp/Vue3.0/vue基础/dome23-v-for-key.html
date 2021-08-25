@@ -1,0 +1,70 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-11 16:53:31
+ * @LastEditTime: 2021-08-12 10:58:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue\dome23-v-for-key.html
+-->
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>ID: <input type="text" v-model="id"></label>
+            <label>Name: <input type="text" v-model="name"></label>
+            <button @click="add">添加</button>
+          </div>
+          <p>==========================</p>
+          <ul>
+            <li v-for="item in listArr" :key="item.id">
+              <input type="checkbox">
+              {{item.id}} --- {{item.name}}
+            </li>
+          </ul>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    id: '',
+                    name: '',
+                    listArr: [
+                        { id: 1, name: '张三' },
+                        { id: 2, name: '小李' },
+                        { id: 3, name: '狂徒' },
+                        { id: 4, name: '法外' },
+                        { id: 5, name: '赵四' },
+                        { id: 6, name: '王五' }
+                    ]
+                }
+            },
+            methods: {
+                add() {
+                    // console.log(this.listArr);
+                    //尾部添加
+                    // this.listArr.push({ id: this.id, name: this.name })
+                    //头部追加
+                    // console.log(this);
+                    // this.listArr.unshift({id: this.id, name: this.name});
+                    this.listArr.unshift({ id: this.id, name: this.name })
+                    // console.log(this.listArr);
+                    // 中间指定追加
+                    // this.listArr.splice(2,0,{ id: this.id, name: this.name });
+
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

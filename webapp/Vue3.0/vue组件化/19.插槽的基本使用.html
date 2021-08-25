@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 10:14:09
+ * @LastEditTime: 2021-08-16 10:32:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\19.插槽的基本使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <leebox>
+            <input type="text">
+        </leebox>
+        <leebox></leebox>
+        <leebox>
+            <img src="https://img10.360buyimg.com/seckillcms/s50x50_jfs/t1/182698/25/18920/186048/6115d751E1dba49eb/a9b78cb85a840a42.jpg" alt="">
+        </leebox>
+
+        <!-- 这是三个同样的模块，内部内容也一致
+            假设 原本是放的三个正方形的广告牌，现在其中一块可能会随需求变化而变化成长方形、圆形或者是异形的广告牌该怎么处理
+            那么我们就需要预留插槽，以便它满足各种场景
+        -->
+        
+    </div>
+    <template id="box">
+        <div style="width: 200px;height: 200px;margin: 20px;background-color: red;">
+            <h2>你好吗</h2>
+            <p>我是谁</p>
+            <!-- 预留插槽 -->
+            <slot>默认内容</slot>
+            <!-- <button>点击我</button> -->
+        </div>
+    </template>
+    <script>
+        const leebox={
+            template:'#box'
+        }
+        const app = Vue.createApp({
+           data() {
+             return {
+                 
+             }
+          },
+           methods:{
+
+          },
+          components:{
+              leebox : leebox
+          }
+         }).mount('#app') 
+
+    </script>
+</body>
+</html>

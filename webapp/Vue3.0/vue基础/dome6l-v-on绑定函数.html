@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-15 11:59:30
+ * @LastEditTime: 2021-08-23 17:27:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue基础\dome6l-v-on绑定函数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 不带参数 -->
+        <h2 @click="myClick">{{ msg }}</h2>
+        <!-- 带参数 -->
+        <h2 @click="myClick_1('123',true,123)">{{ msg1 }}</h2>
+        <!-- 带事件对象 -->
+        <h2 @click="myClick_2('123',true,123,$event)">{{ msg2 }}</h2>
+    </div>
+    <script src='js/vue.js'></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: '不带参数',
+                    msg1:'带参数',
+                    msg2:'带参数和事件对象',
+                }
+            },methods:{
+                myClick(event){
+                    console.log(event)
+                },
+                myClick_1(args_1,args_2,args_3){
+                    console.log(args_1,args_2,args_3)
+                    
+                },
+                myClick_2(args_1,args_2,args_3,event){
+                    console.log(args_1,args_2,args_3,event)
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

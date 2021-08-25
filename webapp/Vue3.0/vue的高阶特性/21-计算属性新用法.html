@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-18 09:33:45
+ * @LastEditTime: 2021-08-18 09:50:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\21-计算属性新用法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            setup(props, context) {
+                const { ref, computed } = Vue;
+                let num = ref(10);
+                let num2 = computed(() => {
+                    console.log('计算')
+                    return num.value  * 10;
+                });
+                const add = ()=>{
+                    console.log('加等计算');
+                    num.value += 10
+                }
+                return {
+                    num,
+                    num2,
+                    add
+                }
+            }
+            ,template:`
+                <div>
+                    <h2>属性num:{{num}}</h2>
+                    <h2>属性num2:{{num2}}</h2>
+                    <h2>属性num2:{{num2}}</h2>
+                    <h2>属性num2:{{num2}}</h2>
+                    <h2>属性num2:{{num2}}</h2>
+                    <h2>属性num2:{{num2}}</h2>
+                    <button @click="add">加等运算</button>
+                </div>
+            `
+
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

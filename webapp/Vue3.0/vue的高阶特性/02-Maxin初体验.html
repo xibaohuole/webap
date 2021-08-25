@@ -1,0 +1,68 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 09:28:51
+ * @LastEditTime: 2021-08-17 09:45:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\02-Maxin初体验.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // 定义一个mixin对象
+        /*
+        1. 实例中的data, methods之类的选项 优先级高于 mixin中 定义的
+        2. 对于 生命周期函数, 先执行 mixin 中的, 然后执行实例中的
+        */
+        const myMixin = {
+            data() {
+                return {
+                    msg: 'lee'
+                }
+            },
+            methods: {
+                hello() {
+                    alert('myMixin:hello, lee');
+                }
+            },
+            mounted() {
+                console.log('++++++++++++++++++myMixin-mounted:实例完成+++++++++++++++++++');
+            }
+        };
+        const app = Vue.createApp({
+            mounted() {
+                console.log('++++++++++++++++++app-mounted:实例完成+++++++++++++++++++');
+            },
+            mixins: [myMixin],
+            data() {
+                return {
+                    msg: '索尼'
+                }
+            },
+            methods: {
+                hello() {
+                    alert('app:哈哈哈哈');
+                }
+            }, template: `
+            <div>
+                <h1>{{msg}}</h1>
+                <button @click="hello">打个招呼</button>
+            </div>
+        `
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-18 09:59:16
+ * @LastEditTime: 2021-08-18 10:30:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\24-侦听器补充.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+           setup(props,context) {
+               const {ref,watch} = Vue;
+
+               let barnd = ref('')
+               let mail = ref('')
+
+               //一 参数监视目标
+               //二 回调 (新参数 旧参数)
+               //三 配置
+               watch(barnd,(currentValue,oldValue)=>{
+                    console.log(currentValue,oldValue);
+               })
+               return{
+                   barnd
+               }
+
+               watch([barnd,mail],([currentBarnd,currentMail],[oldBarnd,oldMail])=>{
+                    console.log(currentBarnd,oldBarnd);
+                    console.log(currentMail,oldMail);
+               },{})
+               return{
+                   barnd,
+                   mail
+               }
+           },
+           template:`
+           <input type="text" v-model="barnd">
+           <p>----------------------------</p>
+           <input type="text" v-model="mail">
+           `
+         }).mount('#app') 
+    </script>
+</body>
+</html>

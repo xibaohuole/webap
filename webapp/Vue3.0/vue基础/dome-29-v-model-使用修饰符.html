@@ -1,0 +1,52 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-12 15:51:56
+ * @LastEditTime: 2021-08-12 16:09:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue\dome-29-v-model-使用修饰符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--1. lazy 失去焦点时才会更新 -->
+        <input type="text" v-model.lazy='msg'>
+        <div>{{msg}}</div>
+
+        <!-- 2.类型 -->
+
+        <input type="number" v-model.number='age'>
+        <div>{{age}} === {{typeof age}}</div>
+
+        
+        <!-- 3.trim 去除首尾空格 -->
+
+        <input type="text" v-model.trim='name'>
+        <div>xxx{{name}}xxx</div>
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                 msg:'你好',
+                 age:0,
+                 name:''
+             }
+          },
+           methods:{
+
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

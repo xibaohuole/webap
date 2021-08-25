@@ -1,0 +1,79 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 09:35:00
+ * @LastEditTime: 2021-08-16 10:09:20
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\18.子组件访问父组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <leebox></leebox>
+    </div>
+    <script>
+        const leebutton = {
+            data(){
+                return{
+                    count : 0,
+                }
+            },
+            methods:{
+                getParent(){
+                    console.log(this.$parent);
+                    
+                    console.log(this.$parent.$el)
+                    this.$parent.$el.style.backgroundColor="#000"
+                    // this.$parent.$el.style = "width:200px;height:50px;border:1px solid #000;background-color:#000";
+                    console.log(typeof(this.$parent.$el))
+                    console.log(this.$parent.abc);
+                    console.log(this.$root.rootMsg)
+                }
+            }
+            ,
+            template :`
+                <button @click='count++'>点击了{{count}}次</button>
+                <button @click='getParent'>获取父级</button>
+            `
+            
+        }
+        const leebox = {
+            data(){
+                return{
+                    abc:'123'
+                }
+            },
+            components:{
+                'leebutton' : leebutton
+            },
+            template : `
+                <div style="width:100px;height:100px;background-color:red">
+                    <leebutton></leebutton>
+                </div>
+            `
+        }
+        const app = Vue.createApp({
+           data() {
+             return {
+                rootMsg:'我是根内容'
+             }
+          },
+           methods:{
+          },
+          components:{
+              'leebox' : leebox
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

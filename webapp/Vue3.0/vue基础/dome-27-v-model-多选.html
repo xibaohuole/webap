@@ -1,0 +1,67 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-12 15:09:33
+ * @LastEditTime: 2021-08-12 15:34:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue\dome-27-v-model-多选.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 单个 -->
+        <label>
+            <input type="checkbox" v-model="isAgree">同意
+        </label>
+
+        <h2>是否同意？{{isAgree?'同意':'不同意'}}</h2>
+
+        <button :disabled="!isAgree">注册</button>
+
+        <p>-----------------------------------------</p>
+
+        <!-- 2.多个选择 -->
+        <label>兴趣爱好</label>
+        <input type="checkbox" v-model="arr" value="篮球">篮球
+        <input type="checkbox" v-model="arr" value="足球">足球
+        <input type="checkbox" v-model="arr" value="水球">水球
+        <input type="checkbox" v-model="arr" value="天球">天球
+
+        <div v-show="arr.length != 0">{{arr}}</div>
+    </br>
+
+        <!-- 3.值绑定 -->
+        <label :for="star" v-for="star in stars">
+            <input type="checkbox" :id="star" :value="star" v-model="likes" >{{star}}
+        </label>
+        <div v-show="likes.length != 0">{{likes}}</div>
+        
+
+    </div>
+    <script>
+        const app = Vue.createApp({
+           data() {
+             return {
+                isAgree:false,
+                arr:[],
+                stars:['周','李','刘','张'],
+                likes:[],
+             }
+          },
+           methods:{
+
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

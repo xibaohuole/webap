@@ -1,0 +1,58 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 15:10:07
+ * @LastEditTime: 2021-08-17 15:23:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\09-setup.html
+-->
+<!-- setup函数 不能调用所有生命周期或者实例内部的东西 但是可以被调用 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            setup(props, context) {
+                console.log(props,context);
+                return {
+                    msg: '123',
+                    log: () => {
+                        alert('我是log');
+                    }
+                }
+            },
+            methods: {
+                deal() {
+                    console.log('这是')
+                }
+            },
+            template: `
+            <div>
+                <h1>{{ msg }}</h1>
+                <button @click="log">点我</button>
+                <button @click="deal">处理</button>
+            </div>
+        `
+            //    data() {
+            //      return {
+
+            //      }
+            //   },
+            //    methods:{
+
+            //   }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

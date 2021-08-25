@@ -1,0 +1,71 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-16 14:03:06
+ * @LastEditTime: 2021-08-16 14:33:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\21.渲染作用域.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <leebox></leebox>
+        <p>-----------------------------------------</p>
+        <leebox>
+            <template v-slot:default="slotProps">
+                <span>{{slotProps.data.join('--')}}</span>
+            </template>
+        </leebox>
+        <p>-----------------------------------------</p>
+        <leebox>
+            <template v-slot:default="slotProps">
+                <span>{{slotProps.data.join('***')}}</span>
+            </template>
+        </leebox>
+    </div>
+    <template id="box">
+        <slot :data="nameArr"> 
+            <div style="background-color: red; width: 200px; height: 200px; margin: 20px;">
+                <ul>
+                    <li v-for="name in nameArr">{{name}}</li>
+                </ul>
+            </div>
+        </slot>
+        
+    </template>
+    <script>
+        const mybox ={
+            nameArr:[],
+            data(){
+                return{
+                    nameArr:['我','是','谁']
+                }
+            },
+            template : '#box'
+        }
+        const app = Vue.createApp({
+           data() {
+             return {
+                 
+             }
+          },
+           methods:{
+
+          },
+          components:{
+            'leebox' : mybox
+          }
+         }).mount('#app') 
+    </script>
+</body>
+</html>

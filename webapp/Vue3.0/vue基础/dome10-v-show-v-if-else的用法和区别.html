@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 一个是删除dom节点重新生成 一个只是加了个dispaly为none -->
+<body>
+    <div id='app'>
+        <!-- <div v-if="isOpen == true">
+            <form>
+                <input value="请输入电话号码">
+                <button value="提交" @click="change">提交电话</button>
+            </form>
+        </div>
+        <div v-else="isOpen==false">
+            <form>
+                <input value="请输入邮箱">
+                <button value="提交" @click="change">提交邮箱</button>
+            </form>
+        </div> -->
+
+        <div v-show="loginType == 'kai'">
+            <form>
+                <input value="请输入电话号码"/>
+                <button value="提交">提交电话</button>
+            </form>
+        </div>
+        <div v-show="loginType =='guan'">
+            <form>
+                <input value="请输入邮箱"/>
+                <button value="提交">提交邮箱</button>
+            </form>
+        </div>
+        <button @click="change">切换</button>
+    </div>
+    <script src='js/vue.js'></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    loginType : 'kai',
+                }
+            },methods:{
+                change(){
+                  this.loginType === 'kai'? this.loginType ='guan' : this.loginType = 'kai'
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

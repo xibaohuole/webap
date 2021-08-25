@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red {
+        color: red;
+    }
+
+    .font60 {
+        font-size: 60px;
+    }
+</style>
+
+<body>
+    <div id='app'>
+        <h2 :class='getClass()' @click='changeColor'>{{ msg }}</h2>
+        <p>------------------------</p>
+        <!-- <h2 :class="getArrsClass()" @click="changeColor">{{ message }}</h2> -->
+
+    </div>
+    <script src='js/vue.js'></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: '怎么办罗',
+                    red: 'red',
+                    font60: 'font60',
+                    isRed: 'true',
+                    isFontSzie60: 'true'
+                }
+            },
+            methods: {
+                getClass(){
+                    return { red: this.isRed, font60: this.isFontSzie60 }
+                }, 
+                // getArrsClass(){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         / 
+                //     return [this.red,this.font60]
+                // },
+                changeColor() {
+                    this.isFontSzie60 = !this.isFontSzie60
+                    this.isRed =!this.isRed
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

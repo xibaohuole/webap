@@ -1,0 +1,71 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 15:10:07
+ * @LastEditTime: 2021-08-17 15:47:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\09-setup.html
+-->
+<!-- setup函数 不能调用所有生命周期或者实例内部的东西 但是可以被调用 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //ref 可以让基础(值)类型的数据具备响应式
+        const app = Vue.createApp({
+            setup(props, context) {
+                // console.log(props,context);
+                // return {
+                //     msg: '123',
+                //     log: () => {
+                //         alert('我是log');
+                //     }
+                // }
+                const {ref} = Vue;//先引用ref模块
+                let msg = ref('123');//使用ref模块 把信息封装成proxy对象({value:'123'})
+                //此时msg已经是一个代理对象 所以不能够直接赋值了 要通过value属性进行赋值
+
+                setTimeout(() => {
+                    // msg = '456';错误
+                    msg.value = '456'
+                }, 2000);
+
+                return {
+                    msg
+                }
+            },
+            methods: {
+                deal() {
+                    console.log('这是')
+                }
+            },
+            template: `
+            <div>
+                <h1>{{ msg }}</h1>
+                <button @click="log">点我</button>
+                <button @click="deal">处理</button>
+            </div>
+        `
+            //    data() {
+            //      return {
+
+            //      }
+            //   },
+            //    methods:{
+
+            //   }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

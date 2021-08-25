@@ -1,0 +1,83 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 15:47:15
+ * @LastEditTime: 2021-08-17 16:12:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\11-reactive.html
+-->
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 15:10:07
+ * @LastEditTime: 2021-08-17 15:44:07
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\09-setup.html
+-->
+<!-- setup函数 不能调用所有生命周期或者实例内部的东西 但是可以被调用 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        //readonly 由于本质来说 vue是单项数据传递 但是setup 让子集和孙集可以去修改 那么怎么让他们不能修改呢
+        const app = Vue.createApp({
+            setup(props, context) {
+                // console.log(props,context);
+                // return {
+                //     msg: '123',
+                //     log: () => {
+                //         alert('我是log');
+                //     }
+                // }
+                const {readonly} = Vue;//先引用reactive模块
+                let msgOjb = readonly({name:'lee',age:123});//使用reactive模块 把信息封装成proxy对象({name:'123',age:123})
+                let msgArray = readonly(['123','456','789']);
+                //此时msg已经是一个代理对象 所以不能够直接赋值了 要通过value属性进行赋值
+
+                setTimeout(() => {
+                    // msg = '456';错误
+                    msgArray[0] = '我',
+                    msgOjb.name = '李文轩'
+                }, 2000);
+
+                return {
+                    msgArray,
+                    msgOjb
+                }
+            },
+            methods: {
+                deal() {
+                    console.log('这是')
+                }
+            },
+            template: `
+            <div>
+                <h1>{{ msgArray }}</h1>
+                <h1>{{ msgOjb.name }}</h1>
+                <button @click="log">点我</button>
+                <button @click="deal">处理</button>
+            </div>
+        `
+            //    data() {
+            //      return {
+
+            //      }
+            //   },
+            //    methods:{
+
+            //   }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

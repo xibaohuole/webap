@@ -1,0 +1,64 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-13 17:02:21
+ * @LastEditTime: 2021-08-20 17:21:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue组件化\17.父组件访问子组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-box ref="box1"></my-box>
+        <button @click="getChildComponent">获取子组件</button>
+    </div>
+    <script>
+
+        const Box = {
+            data() {
+                return {
+                    msg:'如果' 
+                }
+            },
+            methods:{
+                btnClick(){
+                    alert('点了我');
+                }
+            },
+            template: ` 
+            <div style="background-color: red; width: 200px; height: 200px;">
+                <button @click="btnClick">点我</button>
+            </div>
+              `
+        }
+        const app = Vue.createApp({
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                getChildComponent(){
+                    console.log(this.$refs);
+                    console.log(this.$refs.box1);
+                    console.log(this.$refs.box1.msg);
+                }
+            },
+            components:{
+                'my-box' : Box,
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

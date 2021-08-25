@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <h2 style="background-color: red;font-size: 30px;">{{ msg }}</h2>
+
+        <h2 :style="{backgroundColor:'red',fontSize:'30px'}">{{ msg_1 }}</h2>
+
+        <h2 :style="{backgroundColor:red,fontSize:myfontSize}">{{ msg_2 }}</h2>
+
+        <h2 :style="getStyle()">{{ msg_3 }}</h2>
+
+    </div>
+    <script src='js/vue.js'></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: '原始的样式写法',
+                    msg_1:'利用bind-style，绑定一组样式，但是值是写死的',
+                    msg_2:'在bind-style的基础上，利用自定义值的替换，达到动态绑定',
+                    msg_3:'把获取对象的操作封装成函数调用',
+                    red:'red',
+                    myfontSize : '30px'
+                }
+            },
+            methods:{
+                getStyle(){
+                    return {backgroundColor:this.red,fontSize:this.myfontSize}
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

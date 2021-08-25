@@ -1,0 +1,76 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-17 09:08:21
+ * @LastEditTime: 2021-08-17 09:17:39
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Vue3.0\vue的高阶特性\01-Mixin初体验.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <div id="app1"></div>
+    <script>
+        // 定义一个mixin对象
+        const myMixin = {
+            data() {
+                return {
+                    msg: 'lee'
+                }
+            },
+            methods: {
+                sayHello() {
+                    alert(`我是${this.msg},你好` )
+                }
+            }
+        }
+
+        const app1 = Vue.createApp({
+            mixins:[myMixin],
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            }, template: `
+                <div>
+                    <h1>{{msg}}</h1>
+                    <button @click="sayHello">打个招呼</button>
+                </div>
+            `
+        })
+        app1.mount('#app')
+
+        const app2 = Vue.createApp({
+            mixins:[myMixin],
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            },template: `
+                <div>
+                    <h1>{{msg}}</h1>
+                    <button @click="sayHello">什么情况</button>
+                </div>
+            `
+        })
+        app2.mount('#app1')
+    </script>
+</body>
+
+</html>

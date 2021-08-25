@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- 阻止冒泡 -->
+        <div class="box" @click="myClick">
+            <button @click.stop="myBtnClick">{{ msg }}</h2>
+        </div>
+        <!-- 阻止默认事件 -->
+        <form action="http://baidu.com">
+            <input type="submit" value="提交" @click.prevent="addSubmit">
+        </form>
+        <!-- 只执行一次 -->
+        <button @click.once="onceClick">只执行一次</button>
+        <!-- 键盘事件修饰符 -->
+        <input type="text" @keyup="myKeyUp">
+        <input type="text" @keyup.enter="myEnter">
+    </div>
+    <script src='js/vue.js'></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: '怎么办罗'
+                }
+            }
+            ,methods:{
+                myClick(){
+                    console.log("123");
+                    // console.log('dvi触发click事件拉')
+                }
+                ,myBtnClick(){
+                    console.log('H标签触发click事件拉')
+                },addSubmit(){
+                    console.log('提交提交表单')
+                },onceClick(){
+                    console.log('只执行一次')
+                },myEnter(evnet){
+                    console.log('我的回车')
+                },myKeyUp(event){
+                    console.log(event);
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
